@@ -5,7 +5,7 @@ from datetime import datetime as dt
 from datetime import date as d
 
 
-PG    = os.getenv('PG_CONNECTION_STRING')
+PG = os.getenv('PG_CONNECTION_STRING')
 
 request_date = d.today()
 try:
@@ -18,7 +18,7 @@ except getopt.GetoptError:
     #We don't care
     print("")
 
-r =requests.get('https://norway-power.ffail.win/?zone=NO1&date=' + request_date)
+r =requests.get('https://norway-power.ffail.win/?zone=NO1&date=' + str(request_date))
 
 if r.status_code != 200:
     print("HTTP Response: " + str(r.status_code))
