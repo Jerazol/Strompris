@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#!venv/bin/python
 
 import requests, json, postgresql, sys, getopt, os
 from datetime import datetime as dt
@@ -15,12 +15,12 @@ try:
 
    for opt, arg in opts:
       if opt == '-d':
-         request_date_to = arg
+         request_date_to = d.fromisoformat(arg)
 except getopt.GetoptError:
     #We don't care
     print("")
 
-request_date_from = d.fromisoformat(request_date_to) - timedelta(days=1)
+request_date_from = request_date_to - timedelta(days=1)
 
 url = 'https://elvia.azure-api.net/customer/metervalues/api/v1/metervalues?startTime=' + str(request_date_from) + 'T00:00:00+01:00&endTime=' + str(request_date_to) + 'T00:00:00+01:00&meteringPointIds=' + METER
 headers = {'Cache-Control': 'no-cache', 'Authorization': 'Bearer ' + TOKEN}

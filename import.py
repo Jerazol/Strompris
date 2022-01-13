@@ -1,13 +1,15 @@
-#!/usr/bin/python3
+#!venv/bin/python
 
 import requests, json, postgresql, sys, getopt, os
 from datetime import datetime as dt
 from datetime import date as d
+from datetime import timedelta
 
 
 PG = os.getenv('PG_CONNECTION_STRING')
+FFAILTOKEN = os.getenv('FFAILTOKEN')
 
-request_date = d.today()
+request_date = d.today() + timedelta(days=1)
 try:
    opts, args = getopt.getopt(sys.argv[1:],"d:")
 
@@ -18,7 +20,7 @@ except getopt.GetoptError:
     #We don't care
     print("")
 
-r =requests.get('https://norway-power.ffail.win/?zone=NO1&date=' + str(request_date))
+r =requests.get('https://norway-power.ffail.win/?key=' + FFAILTOKEN + '&zone=NO1&date=' + str(request_date))
 
 if r.status_code != 200:
     print("HTTP Response: " + str(r.status_code))
