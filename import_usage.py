@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
 import requests, json, postgresql, sys, getopt, os
 from datetime import datetime as dt
