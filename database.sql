@@ -48,8 +48,8 @@ FROM (
       usage,
       (price+0.0599)*usage AS usage_price,
       usage*0.448 AS nettleie,
-      (price-0.70)*((cast ($3 as numeric))/100) AS rabatt_per_kw,
-      (price-0.70)*((cast ($3 as numeric))/100)*usage AS tot_rabatt
+      GREATEST((price-0.70),0)*((cast ($3 as numeric))/100) AS rabatt_per_kw,
+      GREATEST((price-0.70),0)*((cast ($3 as numeric))/100)*usage AS tot_rabatt
     FROM
       spotprice LEFT JOIN
       hourlyusage ON (price_hour=start_time)
