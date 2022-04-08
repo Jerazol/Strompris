@@ -22,7 +22,7 @@ except getopt.GetoptError:
 
 request_date_from = request_date_to - timedelta(days=1)
 
-url = 'https://elvia.azure-api.net/customer/metervalues/api/v1/metervalues?startTime=' + str(request_date_from) + 'T00:00:00+01:00&endTime=' + str(request_date_to) + 'T00:00:00+01:00&meteringPointIds=' + METER
+url = 'https://elvia.azure-api.net/customer/metervalues/api/v1/metervalues?startTime=' + str(request_date_from) + 'T00:00:00+02:00&endTime=' + str(request_date_to) + 'T00:00:00+02:00&meteringPointIds=' + METER
 headers = {'Cache-Control': 'no-cache', 'Authorization': 'Bearer ' + TOKEN}
 
 r = requests.get(url, headers=headers)

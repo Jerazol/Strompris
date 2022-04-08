@@ -16,6 +16,14 @@ CREATE TABLE usage.hourlyusage (
   PRIMARY KEY (start_time)
 );
 
+DROP TABLE usage.chargerusage;
+CREATE TABLE usage.chargerusage (
+  start_time    TIMESTAMP WITH TIME ZONE,
+  usage         NUMERIC(10,8),
+  end_time      TIMESTAMP WITH TIME ZONE,
+  PRIMARY KEY (start_time)
+);
+
 
 
 
