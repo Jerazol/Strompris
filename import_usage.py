@@ -40,4 +40,12 @@ save_price = db.prepare("INSERT INTO hourlyusage VALUES ($1, $2, $3)")
 tmp1 = json_data['meteringpoints']
 tmp2 = tmp1[0]['metervalue']['timeSeries']
 for key in tmp2:
-    save_price(dt.fromisoformat(key['startTime']), key['value'], dt.fromisoformat(key['endTime']))
+    try:
+      save_price(dt.fromisoformat(key['startTime']), key['value'], dt.fromisoformat(key['endTime']))
+    except postgresql.exceptions.UniqueError as e:
+      print("Duplicate value:")
+      print("----------------")
+      print('startTime:' + key['startTime'])
+      print('endTime:' + key['endTime'])
+      print('value:' + str(key['value']))
+

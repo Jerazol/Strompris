@@ -29,7 +29,7 @@ except getopt.GetoptError:
     #We don't care
     print("")
 
-request_date_to = request_date_from + timedelta(days=365)
+request_date_to = request_date_from + timedelta(days=1)
 
 
 # Get bearer token
@@ -54,7 +54,7 @@ headers = {
 r = requests.get(url, headers=headers)
 request_error(r, "Charger ID")
 json_data = r.json()
-charger = json_data[0]['id'] 
+charger = json_data[0]['id']
 
 
 # Get Usage
@@ -64,10 +64,15 @@ request_error(r, "Get usage")
 json_data = r.json()
 db = postgresql.open(PG)
 
-save_price = db.prepare("INSERT INTO chargerusage VALUES ($1, $2, $3)")
-#tmp1 = json_data['meteringpoints']
-#tmp2 = tmp1[0]['metervalue']['timeSeries']
+save_usage = db.prepare("INSERT INTO chargerusage VALUES ($1, $2, $3)")
+
 for key in json_data:
-    save_price(dt.fromisoformat(key['from'].replace('Z', '+00:00')), key['totalEnergy'], dt.fromisoformat(key['to'].replace('Z', '+00:00')))
-
-
+    if key['totalEnergy'] > 0:
+        try:
+            save_usage(dt.fromisoformat(key['from'].replace('Z', '+00:00')), key['totalEnergy'], dt.fromisoformat(key['to'].replace('Z', '+00:00')))
+        except postgresql.exceptions.UniqueError as e:
+            print("Duplicate value:")
+            print("----------------")
+            print('from:' + key['from'])
+            print('to:' + key['to'])
+            print('totalEnergy:' + str(key['totalEnergy']))
