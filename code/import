@@ -1,0 +1,22 @@
+#!/usr/bin/env python3
+"""
+Script for consuming misc APIs
+
+Self-documenting using argparse
+"""
+
+from importers.importerparser import configure_parser
+
+
+def main():
+    """ main """
+    parser = configure_parser()
+    args = parser.parse_args()
+    if hasattr(args, 'func'):
+        args.func(args)
+        return
+
+    parser.print_help()
+
+if __name__ == "__main__":
+    main()

@@ -1,3 +1,4 @@
 wheel
 py-postgresql
 requests
+tibber.py
