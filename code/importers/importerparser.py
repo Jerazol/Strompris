@@ -1,7 +1,7 @@
 import argparse
 
 from importers.spotprice_ffail import add_ffail_parser
-# from importers.easee import add_easee_parser
+from importers.easee import add_easee_parser
 from importers.elvia_usage import add_elvia_usage_parser
 from importers.spotprice_entsoe import add_entsoe_parser
 
@@ -12,7 +12,7 @@ def configure_parser():
   parent, parser = configure_importers_parser()
   subparsers = parser.add_subparsers(title='commands', dest='command')
   add_ffail_parser(parent, subparsers)
-  #add_easee_parser(parent, subparsers)
+  add_easee_parser(parent, subparsers)
   add_elvia_usage_parser(parent, subparsers)
   add_entsoe_parser(parent, subparsers)
   return parser

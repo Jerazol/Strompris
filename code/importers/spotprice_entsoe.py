@@ -12,8 +12,8 @@ def add_entsoe_parser(parent, subparsers):
 
 def do_entsoe_prices_import(args):
     # root = ET.fromstring(country_data_as_string)
-    print(args.token)
-    print(args.zone)
+    print("Token: " + args.token)
+    print("Zone: " + args.zone)
     tree = ET.parse('/home/tommyg/spotprice_2021.xml')
     root = tree.getroot()
     ns = {'urn': 'urn:iec62325.351:tc57wg16:451-3:publicationdocument:7:0'}
