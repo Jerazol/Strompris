@@ -34,7 +34,7 @@ def do_import(args):
   json_data = r.json()
   db = postgresql.open(PG)
 
-  save_price = db.prepare("INSERT INTO spotprice2 VALUES ($1, $2, $3, $4) ON CONFLICT (price_hour) DO UPDATE SET price = EXCLUDED.price")
+  save_price = db.prepare("INSERT INTO spotprice VALUES ($1, $2, $3, $4) ON CONFLICT (price_hour) DO UPDATE SET price = EXCLUDED.price")
   if args.verbose:
     print(json.dumps(json_data))
 
