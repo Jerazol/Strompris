@@ -24,7 +24,7 @@ def do_easee_charger_import(args):
 
   request_date_from = request_date_to - timedelta(days=1)
 
-  url = 'https://api.easee.cloud/api/accounts/token'
+  url = 'https://api.easee.cloud/api/accounts/login'
   headers = {
     'Content-Type': 'application/*+json',
     'Accept': 'application/json'
